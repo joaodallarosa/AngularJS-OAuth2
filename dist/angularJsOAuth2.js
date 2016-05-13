@@ -72,6 +72,7 @@
 			var previousState = $window.sessionStorage.getItem('verifyState');
 			$window.sessionStorage.setItem('verifyState', null);
 
+			console.log(trustedTokenHash, $location.$$html5,  window.location, window.location.hash);
 			if(trustedTokenHash) {
 				// We 'trust' this hash as it was already 'parsed' by the child iframe before we got it as the parent
 				// and then handed it back (not just reverifying as the sessionStorage was blanked by the child frame, so
@@ -304,9 +305,9 @@
 
 	// Open ID directive
 	angular.module('oauth2.directive', [])
-		.config(['$routeProvider', function ($routeProvider) {
-			$routeProvider
-				.when('/silent-renew', {
+		.config(['$stateProvider', function ($stateProvider) {
+			$stateProvider
+				.state('/silent-renew', {
 					template: ""
 				})
 		}])
